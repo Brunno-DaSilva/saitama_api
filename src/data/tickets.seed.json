@@ -1,0 +1,32 @@
+[
+  {
+    "id": "TCK-10001",
+    "subject": "Stolen Credit Card Report",
+    "description": "Card reported lost at the gym on 8/10.",
+    "status": "open",
+    "requester": {
+      "name": "Chewbacca",
+      "email": "chewbacca@example.com",
+      "phone": "+15550001001"
+    },
+    "assignedAgent": "Agent Smith",
+    "lastUpdate": "Report received, investigation opened.",
+    "createdAt": "2026-08-10T14:22:00.000Z",
+    "updatedAt": "2026-08-10T14:22:00.000Z"
+  },
+  {
+    "id": "TCK-10002",
+    "subject": "Stolen Credit Card Report",
+    "description": "Card stolen from wallet, unauthorized charge noticed.",
+    "status": "in_progress",
+    "requester": {
+      "name": "Han Solo",
+      "email": "han.solo@example.com",
+      "phone": "+15550001002"
+    },
+    "assignedAgent": "Agent Rivera",
+    "lastUpdate": "Replacement card issued, awaiting delivery confirmation.",
+    "createdAt": "2026-08-09T09:05:00.000Z",
+    "updatedAt": "2026-08-11T16:40:00.000Z"
+  }
+]

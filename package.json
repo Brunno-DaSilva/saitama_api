@@ -1,0 +1,23 @@
+{
+  "name": "saitama-capital-mock-api",
+  "version": "1.0.0",
+  "description": "Mock Users & Tickets CRUD API for the Saitama Capital capstone, deployed as Netlify Functions with Netlify Blobs persistence, for a Cognigy voice agent to call.",
+  "private": true,
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy": "netlify deploy --prod"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0",
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "morgan": "^1.11.0",
+    "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.38.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

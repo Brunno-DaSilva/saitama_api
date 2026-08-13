@@ -1,0 +1,119 @@
+[
+  {
+    "id": "usr_1001",
+    "firstName": "Chewbacca",
+    "lastName": "",
+    "fullName": "Chewbacca",
+    "phone": "+15550001001",
+    "email": "chewbacca@example.com",
+    "zipcode": "11001"
+  },
+  {
+    "id": "usr_1002",
+    "firstName": "Han",
+    "lastName": "Solo",
+    "fullName": "Han Solo",
+    "phone": "+15550001002",
+    "email": "han.solo@example.com",
+    "zipcode": "11002"
+  },
+  {
+    "id": "usr_1003",
+    "firstName": "Mauro",
+    "lastName": "Mauriciam",
+    "fullName": "Mauro Mauriciam",
+    "phone": "+15550001003",
+    "email": "mauro.mauriciam@example.com",
+    "zipcode": "11003"
+  },
+  {
+    "id": "usr_1004",
+    "firstName": "Lea",
+    "lastName": "",
+    "fullName": "Lea",
+    "phone": "+15550001004",
+    "email": "lea@example.com",
+    "zipcode": "11004"
+  },
+  {
+    "id": "usr_1005",
+    "firstName": "Luke",
+    "lastName": "",
+    "fullName": "Luke",
+    "phone": "+15550001005",
+    "email": "luke@example.com",
+    "zipcode": "11005"
+  },
+  {
+    "id": "usr_1006",
+    "firstName": "Obi Wan",
+    "lastName": "Kenobi",
+    "fullName": "Obi Wan Kenobi",
+    "phone": "+15550001006",
+    "email": "obiwan.kenobi@example.com",
+    "zipcode": "11006"
+  },
+  {
+    "id": "usr_1007",
+    "firstName": "Asoka",
+    "lastName": "",
+    "fullName": "Asoka",
+    "phone": "+15550001007",
+    "email": "asoka@example.com",
+    "zipcode": "11007"
+  },
+  {
+    "id": "usr_1008",
+    "firstName": "Kyle",
+    "lastName": "",
+    "fullName": "Kyle",
+    "phone": "+15550001008",
+    "email": "kyle@example.com",
+    "zipcode": "11008"
+  },
+  {
+    "id": "usr_1009",
+    "firstName": "Bosk",
+    "lastName": "",
+    "fullName": "Bosk",
+    "phone": "+15550001009",
+    "email": "bosk@example.com",
+    "zipcode": "11009"
+  },
+  {
+    "id": "usr_1010",
+    "firstName": "Boba",
+    "lastName": "",
+    "fullName": "Boba",
+    "phone": "+15550001010",
+    "email": "boba@example.com",
+    "zipcode": "11010"
+  },
+  {
+    "id": "usr_1011",
+    "firstName": "Darth",
+    "lastName": "Maul",
+    "fullName": "Darth Maul",
+    "phone": "+15550001011",
+    "email": "darth.maul@example.com",
+    "zipcode": "11011"
+  },
+  {
+    "id": "usr_1012",
+    "firstName": "Palpatine",
+    "lastName": "",
+    "fullName": "Palpatine",
+    "phone": "+15550001012",
+    "email": "palpatine@example.com",
+    "zipcode": "11012"
+  },
+  {
+    "id": "usr_1013",
+    "firstName": "Jyn",
+    "lastName": "Erso",
+    "fullName": "Jyn Erso",
+    "phone": "+15550001013",
+    "email": "jyn.erso@example.com",
+    "zipcode": "11013"
+  }
+]
