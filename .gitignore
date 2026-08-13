@@ -45,3 +45,5 @@ knowledge-stores/*.json
 # Optional: If you use Next.js or similar frameworks
 .next/
 out/
+# Local Netlify folder
+.netlify
