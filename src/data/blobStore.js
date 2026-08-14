@@ -22,12 +22,24 @@ const ticketsSeed = require("./tickets.seed.json");
 
 const SEEDED_KEY = "__seeded__";
 
+// Netlify normally injects Blobs credentials automatically for Functions
+// running on its own infrastructure. If that automatic detection fails for
+// this site, NETLIFY_SITE_ID + NETLIFY_AUTH_TOKEN (a personal access token)
+// let getStore() authenticate explicitly instead.
+function storeConfig(name) {
+  const { NETLIFY_SITE_ID, NETLIFY_AUTH_TOKEN } = process.env;
+  if (NETLIFY_SITE_ID && NETLIFY_AUTH_TOKEN) {
+    return { name, siteID: NETLIFY_SITE_ID, token: NETLIFY_AUTH_TOKEN };
+  }
+  return name;
+}
+
 function usersStore() {
-  return getStore("users");
+  return getStore(storeConfig("users"));
 }
 
 function ticketsStore() {
-  return getStore("tickets");
+  return getStore(storeConfig("tickets"));
 }
 
 async function ensureSeeded(store, seedArray) {
