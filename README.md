@@ -1,8 +1,9 @@
 # Saitama Capital Mock API
 
-A mock **Users** and **Tickets** CRUD API for the Saitama Capital capstone track, built to be
-called from a Cognigy voice agent's HTTP Request Nodes. Deployed as **Netlify Functions**
-(Express via `serverless-http`), with **Netlify Blobs** for persistence.
+A mock **Users**, **Tickets**, and **Notes** API for the Saitama Capital banking capstone track,
+built to be called from a Cognigy voice agent's HTTP Request Nodes. Deployed as **Netlify
+Functions** (Express via `serverless-http`), with **Netlify Blobs** for persistence. Tickets are
+the focus of the API - Notes are a sub-resource attached to a ticket.
 
 ## Why this architecture
 
@@ -28,7 +29,7 @@ saitama-api/
 ├── netlify/functions/api.js      # single Function - Express wrapped w/ serverless-http
 └── src/
     ├── data/
-    │   ├── blobStore.js           # Netlify Blobs access layer
+    │   ├── blobStore.js           # Netlify Blobs access layer (users/tickets/notes)
     │   ├── users.seed.json        # 5 sample users
     │   └── tickets.seed.json      # 2 sample tickets
     ├── middleware/
@@ -36,10 +37,12 @@ saitama-api/
     │   └── errorHandler.js
     ├── controllers/
     │   ├── users.controller.js
-    │   └── tickets.controller.js
+    │   ├── tickets.controller.js
+    │   └── notes.controller.js
     └── routes/
         ├── users.routes.js
-        └── tickets.routes.js
+        ├── tickets.routes.js
+        └── notes.routes.js        # mounted at /tickets/:id/notes
 ```
 
 ## Deploy to Netlify
@@ -66,7 +69,7 @@ saitama-api/
    netlify deploy --prod
    ```
 5. Your base URL will be something like `https://<your-site-name>.netlify.app`. The API is
-   available under `/api/...` (e.g. `https://<your-site-name>.netlify.app/api/health`).
+   available under `/api/...` (e.g. `https://<your-site-name>.netlify.app/api/tickets`).
 
 ### Local testing before you deploy
 
@@ -79,8 +82,7 @@ costs credits, so don't burn them on iteration.
 
 ## Endpoint reference
 
-All endpoints below are prefixed with `/api`. Send `X-API-Key: <your API_KEY>` on every request
-except `/health`.
+All endpoints below are prefixed with `/api` and require `X-API-Key: <your API_KEY>`.
 
 ### Users
 
@@ -112,6 +114,24 @@ except `/health`.
   "requester": { "name": "John Doe", "email": "john.doe@example.com", "phone": "+15551234567" }
 }
 ```
+
+### Notes (sub-resource of a ticket)
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/tickets/:id/notes` | List all notes attached to a ticket |
+| POST | `/tickets/:id/notes` | Add a note to a ticket |
+
+Both 404 if `:id` doesn't match an existing ticket. `POST /tickets/:id/notes` body shape:
+```json
+{
+  "text": "Called customer back, awaiting card replacement.",
+  "author": "Agent Smith"
+}
+```
+`author` is optional. Notes are stored as their own Netlify Blobs records (not nested inside the
+ticket record) referencing their parent via `ticketId`, for the same last-write-wins/concurrency
+reason described above.
 
 ## Using this from Cognigy
 

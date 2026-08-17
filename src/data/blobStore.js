@@ -1,19 +1,21 @@
 /**
- * Netlify Blobs-backed data access layer for Users and Tickets.
+ * Netlify Blobs-backed data access layer for Users, Tickets, and Notes.
  *
  * Description (plain English): Wraps @netlify/blobs getStore() calls for
- *   two site-wide stores - "users" and "tickets" - storing one record per
- *   blob key (keyed by the record's own id) rather than one big JSON blob.
- *   This matters because Netlify Blobs uses last-write-wins per key with
- *   no concurrency control: if we stored the whole collection as a single
- *   key, two people creating tickets around the same time could silently
- *   clobber each other's write. Per-record keys avoid that.
+ *   three site-wide stores - "users", "tickets", and "notes" - storing one
+ *   record per blob key (keyed by the record's own id) rather than one big
+ *   JSON blob. This matters because Netlify Blobs uses last-write-wins per
+ *   key with no concurrency control: if we stored a whole collection as a
+ *   single key, two people creating tickets (or notes) around the same time
+ *   could silently clobber each other's write. Per-record keys avoid that.
+ *   Notes reference their parent ticket via a `ticketId` field rather than
+ *   being nested inside the ticket record itself, for the same reason.
  * Author: NA Professional Services
  * Created: 2026-08-13
  * Dependencies: @netlify/blobs
  * Inputs: none directly - reads users.seed.json / tickets.seed.json once
- * Expected output: module exposing list/get/save/delete helpers for both
- *   stores
+ * Expected output: module exposing list/get/save/delete helpers for all
+ *   three stores
  */
 
 const { getStore } = require("@netlify/blobs");
@@ -40,6 +42,10 @@ function usersStore() {
 
 function ticketsStore() {
   return getStore(storeConfig("tickets"));
+}
+
+function notesStore() {
+  return getStore(storeConfig("notes"));
 }
 
 async function ensureSeeded(store, seedArray) {
@@ -100,6 +106,19 @@ async function deleteTicket(id) {
   await store.delete(id);
 }
 
+// --- Notes ---
+
+async function listNotesByTicketId(ticketId) {
+  const notes = await listRecords(notesStore(), []);
+  return notes.filter((note) => note.ticketId === ticketId);
+}
+
+async function saveNote(note) {
+  const store = notesStore();
+  await store.setJSON(note.id, note);
+  return note;
+}
+
 module.exports = {
   listUsers,
   getUserById,
@@ -107,4 +126,6 @@ module.exports = {
   getTicketById,
   saveTicket,
   deleteTicket,
+  listNotesByTicketId,
+  saveNote,
 };

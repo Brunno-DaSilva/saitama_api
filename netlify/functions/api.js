@@ -2,8 +2,7 @@
  * Single Netlify Function - Express app wrapped with serverless-http.
  *
  * Description: Mounts the Users and Tickets routers under /api, guarded by
- *   apiKeyAuth (except /api/health, which is intentionally unauthenticated
- *   so it can be used as an uptime check).
+ *   apiKeyAuth on every route.
  * Author: NA Professional Services
  * Created: 2026-08-13
  * Dependencies: express, cors, morgan, serverless-http, ../../src/*
@@ -28,8 +27,6 @@ app.use(morgan("tiny"));
 app.use(express.json());
 
 const api = express.Router();
-
-api.get("/health", (req, res) => res.json({ status: "ok" }));
 
 api.use(apiKeyAuth);
 api.use("/users", usersRoutes);
